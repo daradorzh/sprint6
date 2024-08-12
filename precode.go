@@ -48,14 +48,12 @@ func getTasks(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err2 := w.Write(resp)
-	if err2 != nil {
-		log.Println(err2)
+	if _, err := w.Write(resp); err != nil {
+		log.Println(err)
 	}
 
 	w.Header().Set("Content-Type", "aplication/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write(resp)
 
 }
 
@@ -99,9 +97,12 @@ func getTaskID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if _, err := w.Write(resp); err != nil {
+		log.Println(err)
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
-	w.Write(resp)
 }
 
 func deleteTasks(w http.ResponseWriter, r *http.Request) {
